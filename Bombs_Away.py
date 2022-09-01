@@ -162,3 +162,4 @@ if __name__=='__main__':
     bomb.bomb()
     bomb.email()
     bomb.attack()
+    
