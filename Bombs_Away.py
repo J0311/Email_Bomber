@@ -2,7 +2,6 @@
 # Second import sys module, which allows us to exit program when needed, or if there's an error
 # e.g. - print(sys.version) returns a String containing Python Interpreter info
 
-
 '''imports'''
 import smtplib
 import sys
